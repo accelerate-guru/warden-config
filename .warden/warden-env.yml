@@ -21,6 +21,15 @@ services:
       timeout: 3s
       retries: 5
 
+  # Add db-upstream alias to the real DB so AG can reach it transparently.
+  # AG takes over the "db" alias on port 3306 — env.php needs no changes.
+  db:
+    networks:
+      default:
+        aliases:
+          - db
+          - db-upstream
+
   accelerate-guru:
     image: ghcr.io/accelerate-guru/edge:latest
     restart: unless-stopped
@@ -29,6 +38,12 @@ services:
         condition: service_healthy
       nginx:
         condition: service_started
+      db:
+        condition: service_started
+    networks:
+      default:
+        aliases:
+          - db
     volumes:
       - "./.warden/config/magento_ultra.ini:/etc/accelerate-guru/magento_ultra.ini:ro"
       - "./app/etc:/var/www/html/app/etc:ro"
