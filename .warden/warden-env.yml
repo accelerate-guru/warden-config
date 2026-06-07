@@ -33,6 +33,7 @@ services:
       - "./.warden/config/magento_ultra.ini:/etc/accelerate-guru/magento_ultra.ini:ro"
       - "./app/etc:/var/www/html/app/etc:ro"
       - "ag-state:/var/lib/accelerate-guru"
+      - "ag-cache:/var/cache/accelerate-guru"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.${WARDEN_ENV_NAME}-ag.rule=Host(`${TRAEFIK_MAGENTO_SUBDOMAIN:-app}.${TRAEFIK_DOMAIN}`)"
@@ -44,3 +45,4 @@ services:
 volumes:
   dragonfly-data:
   ag-state:
+  ag-cache:
