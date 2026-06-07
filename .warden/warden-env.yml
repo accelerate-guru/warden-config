@@ -12,10 +12,11 @@ services:
       --logtostderr
       --cache_mode=true
       --maxmemory=512mb
+      --proactor_threads=2
     volumes:
       - dragonfly-data:/data
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test: ["CMD", "/bin/sh", "-c", "echo PING | nc -w1 127.0.0.1 6379 | grep -q PONG"]
       interval: 5s
       timeout: 3s
       retries: 5
