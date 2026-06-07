@@ -14,11 +14,14 @@ That's it. Accelerate Guru is now serving your site with full-page cache, image 
 
 All options are documented inline. The defaults work out of the box for any Warden project.
 
-The only line you may need to change:
+If you use Varnish (`WARDEN_VARNISH=1` in your `.env`), change `upstream_addr` to `varnish`. Both `nginx` and `varnish` listen on port 80 — the port never changes.
 
 ```ini
-; 80 by default. Change to 8080 if WARDEN_VARNISH=1 is set in your .env.
-upstream_port = 80
+; no Varnish (default):
+upstream_addr = nginx
+
+; with Varnish (WARDEN_VARNISH=1):
+upstream_addr = varnish
 ```
 
 ---
