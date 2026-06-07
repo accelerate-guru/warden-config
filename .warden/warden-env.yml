@@ -21,8 +21,6 @@ services:
       timeout: 3s
       retries: 5
 
-  # Add db-upstream alias to the real DB so AG can reach it transparently.
-  # AG takes over the "db" alias on port 3306 — env.php needs no changes.
   db:
     networks:
       default:
