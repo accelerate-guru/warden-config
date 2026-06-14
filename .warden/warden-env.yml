@@ -43,7 +43,7 @@ services:
         aliases:
           - db
     volumes:
-      - "./.warden/config/magento_ultra.ini:/etc/accelerate-guru/magento_ultra.ini:ro"
+      - "./.warden/config:/etc/accelerate-guru"
       - "./app/etc:/var/www/html/app/etc:ro"
       - "ag-state:/var/lib/accelerate-guru"
     tmpfs:

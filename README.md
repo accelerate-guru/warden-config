@@ -28,7 +28,7 @@ upstream_addr = varnish
 
 **Stats dashboard** — `https://yoursite.test/stats-ag`
 
-Shows cache hit rate, bandwidth saved, live config, and cache controls.
+Shows cache hit rate, bandwidth saved, live config, and cache controls. Toggle changes are written back to `.warden/config/magento_ultra.ini` (and sibling INI files) and hot-reload without a container restart.
 
 ---
 
