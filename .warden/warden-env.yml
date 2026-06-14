@@ -50,6 +50,7 @@ services:
       - /var/cache/accelerate-guru:uid=65532,gid=65532
     labels:
       - "traefik.enable=true"
+      # Primary Magento host. Add extra masked domains with || Host(`example.com`).
       - "traefik.http.routers.${WARDEN_ENV_NAME}-ag.rule=Host(`${TRAEFIK_MAGENTO_SUBDOMAIN:-app}.${TRAEFIK_DOMAIN}`)"
       - "traefik.http.routers.${WARDEN_ENV_NAME}-ag.tls=true"
       - "traefik.http.routers.${WARDEN_ENV_NAME}-ag.entrypoints=https"

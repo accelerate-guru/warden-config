@@ -30,6 +30,16 @@ upstream_addr = varnish
 
 Shows cache hit rate, bandwidth saved, live config, and cache controls. Toggle changes are written back to `.warden/config/magento_ultra.ini` (and sibling INI files) and hot-reload without a container restart.
 
+`/stats-ag` is only served on **licensed** hosts (e.g. `mage.yoursite.test` with `key = dev`). Unlicensed domains such as a masked `.com` without a production key are transparent pass-through — no cache, no rewrite, and `/stats-ag` is forwarded to Magento as usual.
+
+To put a licensed `.com` behind AG, add it to the Traefik router **and** your license:
+
+```yaml
+accelerate-guru:
+  labels:
+    - "traefik.http.routers.${WARDEN_ENV_NAME}-ag.rule=Host(`mage.${TRAEFIK_DOMAIN}`) || Host(`example.com`)"
+```
+
 ---
 
 **CLI commands**
